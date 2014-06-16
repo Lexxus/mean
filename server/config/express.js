@@ -18,9 +18,10 @@ var express = require('express'),
     flash = require('connect-flash'),
     helpers = require('view-helpers'),
     config = require('./config'),
+    assets = require('./assets.json'),
     expressValidator = require('express-validator'),
     appPath = process.cwd(),
-    util = require('./util'),
+    util = require('meanio/lib/util'),
     assetmanager = require('assetmanager'),
     fs = require('fs'),
     Grid = require('gridfs-stream');
@@ -59,7 +60,7 @@ module.exports = function(app, passport, db) {
     // Set views path, template engine and default layout
     app.set('views', config.root + '/server/views');
 
-    // Enable jsonp
+    // Enable JSONP
     app.enable('jsonp callback');
 
     // The cookieParser should be above session
@@ -70,16 +71,13 @@ module.exports = function(app, passport, db) {
     app.use(bodyParser());
     app.use(methodOverride());
 
-    // Import the assets file
-    var assets = assetmanager.process({
-        assets: require('./assets.json'),
-        debug: (process.env.NODE_ENV !== 'production'),
-        webroot: 'public/public'
-    });
-
-    // Add assets to local variables
+    // Import the assets file and add to locals
     app.use(function(req, res, next) {
-        res.locals.assets = assets;
+	res.locals.assets = assetmanager.process({
+	    assets: assets,
+	    debug: process.env.NODE_ENV !== 'production',
+	    webroot: 'public/public'
+	});
         next();
     });
 
@@ -89,7 +87,9 @@ module.exports = function(app, passport, db) {
         store: new mongoStore({
             db: db.connection.db,
             collection: config.sessionCollection
-        })
+        }),
+        cookie: config.sessionCookie,
+        name: config.sessionName
     }));
 
     // Dynamic helpers
@@ -105,7 +105,7 @@ module.exports = function(app, passport, db) {
     // Connect flash for flash messages
     app.use(flash());
 
-    // Setting the fav icon and static folder
+    // Setting the favicon and static folder
     app.use(favicon(appPath + '/public/system/assets/img/favicon.ico'));
 
     app.get('/modules/aggregated.js', function(req, res) {
@@ -161,7 +161,7 @@ module.exports = function(app, passport, db) {
             // Skip the app/routes/middlewares directory as it is meant to be
             // used and shared by routes as further middlewares and is not a
             // route by itself
-            util.walk(appPath + '/server/routes', 'middlewares', function(path) {
+            util.walk(appPath + '/server', 'route', 'middlewares', function(path) {
                 require(path)(app, passport);
             });
         }
