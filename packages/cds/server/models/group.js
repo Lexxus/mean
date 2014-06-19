@@ -10,16 +10,15 @@ var mongoose = require('mongoose'),
 /**
  * Tag Schema
  */
-var TagSchema = new Schema({
+var GroupSchema = new Schema({
     name: {
         type: String,
         default: '',
         trim: true
     },
-    parent: {
-        type: String,
-        default: '',
-        trim: true
+    category: {
+        type: Schema.ObjectId,
+        ref: 'Category'
     },
     hidden: {
         type: Boolean,
@@ -30,8 +29,8 @@ var TagSchema = new Schema({
 /**
  * Validations
  */
-TagSchema.path('name').validate(function(name) {
+GroupSchema.path('name').validate(function(name) {
     return name.length;
-}, 'Tag cannot be blank');
+}, 'Group cannot be blank');
 
-mongoose.model('Tag', TagSchema);
+mongoose.model('Group', GroupSchema);

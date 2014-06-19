@@ -8,15 +8,10 @@ var mongoose = require('mongoose'),
 
 
 /**
- * Tag Schema
+ * Category Schema
  */
-var TagSchema = new Schema({
+var CategorySchema = new Schema({
     name: {
-        type: String,
-        default: '',
-        trim: true
-    },
-    parent: {
         type: String,
         default: '',
         trim: true
@@ -24,14 +19,18 @@ var TagSchema = new Schema({
     hidden: {
         type: Boolean,
         default: false
+    },
+    access: {
+        type: Array,
+        default: []
     }
 });
 
 /**
  * Validations
  */
-TagSchema.path('name').validate(function(name) {
+CategorySchema.path('name').validate(function(name) {
     return name.length;
 }, 'Tag cannot be blank');
 
-mongoose.model('Tag', TagSchema);
+mongoose.model('Category', CategorySchema);
