@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 
 
 /**
- * Tag Schema
+ * Group Schema
  */
 var GroupSchema = new Schema({
     name: {
