@@ -13,16 +13,15 @@ var mongoose = require('mongoose'),
 var CategorySchema = new Schema({
     name: {
         type: String,
-        default: '',
         trim: true
     },
-    hidden: {
-        type: Boolean,
-        default: false
+    sid: {
+        type: Number,
+        default: 0
     },
     access: {
-        type: Array,
-        default: []
+        type: String,
+        default: ''
     }
 });
 

@@ -16,14 +16,17 @@ var TagSchema = new Schema({
         default: '',
         trim: true
     },
-    parent: {
-        type: String,
-        default: '',
-        trim: true
+    parent_tag: {
+        type: Schema.ObjectId,
+        default: null
     },
-    hidden: {
-        type: Boolean,
-        default: false
+    category: {
+        type: Schema.ObjectId,
+        ref: 'Category'
+    },
+    sid: {
+        type: Number,
+        default: 0
     }
 });
 
