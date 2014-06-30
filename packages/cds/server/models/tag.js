@@ -20,9 +20,16 @@ var TagSchema = new Schema({
         type: Schema.ObjectId,
         default: null
     },
+    parent_tag_name: {
+        type: String,
+        default: ''
+    },
     category: {
         type: Schema.ObjectId,
         ref: 'Category'
+    },
+    category_name: {
+        type: String
     },
     sid: {
         type: Number,

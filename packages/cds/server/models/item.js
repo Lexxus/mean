@@ -29,9 +29,8 @@ var ItemSchema = new Schema({
         type: String,
         default: ''
     },
-    category: {
-        type: Schema.ObjectId,
-        ref: 'Category'
+    category_name: {
+        type: String
     },
     tags: {
         type: Array,
@@ -40,6 +39,9 @@ var ItemSchema = new Schema({
     properties: {
         type: Array,
         default: []
+    },
+    creation_date: {
+        type: Date
     }
 });
 
@@ -49,8 +51,5 @@ var ItemSchema = new Schema({
 ItemSchema.path('name').validate(function(name) {
     return name.length;
 }, 'Property cannot be blank');
-ItemSchema.path('category').validate(function(category) {
-    return !!category;
-}, 'Category is mandatory');
 
 mongoose.model('Item', ItemSchema);

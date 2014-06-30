@@ -20,9 +20,21 @@ var PropertySchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Group'
     },
+    group_name: {
+        type: String,
+        default: ''
+    },
     category: {
         type: Schema.ObjectId,
         ref: 'Category'
+    },
+    category_name: {
+        type: String,
+        default: ''
+    },
+    sid: {
+        type: Number,
+        default: 0
     }
 });
 
