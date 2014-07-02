@@ -297,4 +297,4 @@ exports.migrateItems = function(req, res) {
 			Item.create(item, done);
 		});
 	}
-}
+};
