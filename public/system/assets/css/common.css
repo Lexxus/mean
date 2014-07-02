@@ -1,3 +1,14 @@
+/***** Bootstrap Theme *****/
+.btn, .cds .nav > li > a, .cds .nav-pills > li > a {
+    border-radius: 2px;
+    padding: 4px 8px;
+}
+.cds .nav-pills > li > a {
+    text-transform: uppercase;
+    border: 1px solid #DDD;
+}
+/* // End Bootstrap Theme */
+
 .page-header {
     padding-bottom: 0 !important;
     margin: 0 !important;
@@ -17,6 +28,9 @@
 }
 .account>div, .account>ul {
     text-align:left;
+}
+.navbar {
+    border-bottom: 1px #DDD solid;
 }
 .navbar .nav>li>a.brand {
     padding-left:20px;

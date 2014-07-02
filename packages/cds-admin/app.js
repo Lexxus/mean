@@ -18,7 +18,7 @@ CdsAdmin.register(function(app, auth, database, Cds) {
 
     //We are adding a link to the main menu for all authenticated users
     CdsAdmin.menus.add({
-        title: 'CDS Admin',
+        title: 'Admin Panel',
         link: 'cdsAdmin example page',
         roles: ['admin'],
         menu: 'main'

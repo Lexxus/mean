@@ -1,15 +1,14 @@
 'use strict';
 
+var categoryController = require('../controllers/category'),
+    tagController = require('../controllers/tag');
+
 // The Package is past automatically as first parameter
 module.exports = function(Cds, app, auth, database) {
 
-    app.get('/cds/example/anyone', function(req, res, next) {
-        res.send('Anyone can access this');
-    });
+    app.get('/cds/category/:id?', categoryController.getCategory);
 
-    app.get('/cds/example/auth', auth.requiresLogin, function(req, res, next) {
-        res.send('Only authenticated users can access this');
-    });
+    app.get('/cds/tags/:cat_id', tagController.getTags);
 
     app.get('/cds/example/admin', auth.requiresAdmin, function(req, res, next) {
         res.send('Only users with Admin role can access this');

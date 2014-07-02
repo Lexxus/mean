@@ -2,9 +2,12 @@
 
 angular.module('mean.cds').config(['$stateProvider',
     function($stateProvider) {
-        $stateProvider.state('cds example page', {
-            url: '/cds/example',
+        $stateProvider.state('cds page', {
+            url: '/',
             templateUrl: 'cds/views/index.html'
+        }).state('category', {
+        	url: '/cat/:cat',
+        	templateUrl: 'cds/views/index.html'
         });
     }
 ]);

@@ -17,12 +17,12 @@ Cds.register(function(app, auth, database) {
     Cds.routes(app, auth, database);
 
     //We are adding a link to the main menu for all authenticated users
-    Cds.menus.add({
-        title: 'cds example page',
-        link: 'cds example page',
-        roles: ['authenticated'],
-        menu: 'main'
-    });
+    // Cds.menus.add({
+    //     title: 'CDS',
+    //     link: 'cds page',
+    //     roles: ['anonymous'],
+    //     menu: 'main'
+    // });
 
     /**
     //Uncomment to use. Requires meanio@0.3.7 or above

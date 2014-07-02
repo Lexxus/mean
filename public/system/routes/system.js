@@ -9,7 +9,7 @@ angular.module('mean.system').config(['$stateProvider', '$urlRouterProvider',
             // states for my app
             $stateProvider
                 .state('home', {
-                    url: '/',
+                    url: '/home',
                     templateUrl: '/system/views/index.html'
                 })
                 .state('auth', {
