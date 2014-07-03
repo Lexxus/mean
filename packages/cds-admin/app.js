@@ -11,10 +11,10 @@ var CdsAdmin = new Module('cds-admin');
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-CdsAdmin.register(function(app, auth, database, Cds) {
+CdsAdmin.register(function(app, auth, database, cds) {
 
     //We enable routing. By default the Package Object is passed to the routes
-    CdsAdmin.routes(app, auth, database, Cds);
+    CdsAdmin.routes(app, auth, database, cds);
 
     //We are adding a link to the main menu for all authenticated users
     CdsAdmin.menus.add({
