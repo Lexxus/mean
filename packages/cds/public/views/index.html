@@ -4,9 +4,15 @@
 		{{ status.text }}
 	</div>
 	<ul class="nav nav-pills">
-		<li ng-repeat="c in categories" ng-class="c.name === category ? 'active':''">
+		<li ng-repeat="c in categories" ng-class="c.name === category.name ? 'active':''">
 			<a href="#!/cat/{{c.name}}">{{c.name}}</a>
 		</li>
 	</ul>
-	<h2>{{category}}</h2>
+	<h2>{{category.name}}</h2>
+	<div class="dropdown">
+		<button type="button" class="btn btn-default dropdown-toggle" id="tagsDropdown">Tags <span class="caret"></span></button>
+		<ul class="dropdown-menu" role="menu" aria-labeledby="tagsDropdown">
+			<li role="presentation" ng-repeat="t in tags"><a href="#" role="menuitem" tabindex="-1">{{t.name}}</a></li>
+		</ul>
+	</div>
 </div>

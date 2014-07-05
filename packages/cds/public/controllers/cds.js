@@ -8,6 +8,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
         	text: ''
         };
         $scope.status = status;
+        $scope.tags = [];
 
         if(Global.categories) {
         	$scope.categories = Global.categories;
@@ -22,8 +23,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
 	        	})
 	        	.error(function(err) {
 	        		console.log(err);
-	        		status.type = 'error';
-	        		status.text = err.message;
+	        		showAlert('error', err.message);
 	        	})
 	        ;
 	    }
@@ -31,13 +31,32 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
         window.addEventListener('hashchange', changeCategory, false);
 
         function changeCategory() {
-            var cat = window.location.hash.split('/').pop();
+            var catName = window.location.hash.split('/').pop();
             if(!$scope.categories) return;
             var isNotValid = $scope.categories.every(function(c) {
-                return c.name !== cat; 
+                var isCat = c.name === catName;
+                if(isCat) {
+                    $scope.category = c;
+                }
+                return !isCat;
             });
             if(isNotValid) return;
-            $scope.category = cat;
+
+            Cds.getTags($scope.category._id)
+                .success(function(data) {
+                    $scope.tags = data;
+                    console.log(data);
+                })
+                .error(function(err) {
+                    console.log(err);
+                    showAlert('error', err.message);
+                })
+            ;
+        }
+
+        function showAlert(message, type) {
+            status.type = type || 'info';
+            status.text = message;
         }
     }
 ]);
