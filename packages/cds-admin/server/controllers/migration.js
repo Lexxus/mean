@@ -283,6 +283,7 @@ exports.migrateItems = function(req, res) {
 				description: row.description,
 				image_src: row.image_src,
 				file_src: row.file_src,
+				category: row.type_id,
 				category_name: categories[row.type_id].name,
 				tags: ts.map(function(t) {
 					var tag = tags[t.tag_id];

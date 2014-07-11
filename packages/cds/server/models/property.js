@@ -29,12 +29,10 @@ var PropertySchema = new Schema({
         ref: 'Category'
     },
     category_name: {
-        type: String,
-        default: ''
+        type: String
     },
     sid: {
-        type: Number,
-        default: 0
+        type: Number
     }
 });
 

@@ -8,11 +8,32 @@
 			<a href="#!/cat/{{c.name}}">{{c.name}}</a>
 		</li>
 	</ul>
-	<h2>{{category.name}}</h2>
-	<div class="dropdown">
-		<button type="button" class="btn btn-default dropdown-toggle" id="tagsDropdown">Tags <span class="caret"></span></button>
-		<ul class="dropdown-menu" role="menu" aria-labeledby="tagsDropdown">
-			<li role="presentation" ng-repeat="t in tags"><a href="#" role="menuitem" tabindex="-1">{{t.name}}</a></li>
-		</ul>
+	<div class="filter-bar" ng-hide="!category">
+		<div class="btn-group">
+			<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">Objects <span class="caret"></span></button>
+			<ul class="dropdown-menu" role="menu">
+				<li role="presentation" ng-repeat="t in tags"><a href="#" role="menuitem" tabindex="-1">{{t.name}}</a></li>
+			</ul>
+		</div>
+		<div class="btn-group" ng-repeat="f in fgroups">
+			<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">{{f.name}} <span class="caret"></span></button>
+			<ul class="dropdown-menu" role="menu">
+				<li role="presentation" ng-repeat="p in fdata[f.name]"><a href="#" role="menuitem" tabindex="-1">{{p.name}}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-7">
+			<h4>{{category.name}} SHOP</h4>
+			<div class="shopitem" ng-repeat="item in shopitems">
+				{{item.name}}
+			</div>
+		</div>
+		<div class="col-md-5">
+			<h4>3D MODELS</h4>
+			<div class="d3item" ng-repeat="item in d3items">
+				{{item.name}}
+			</div>
+		</div>
 	</div>
 </div>

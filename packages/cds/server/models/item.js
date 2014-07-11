@@ -29,6 +29,10 @@ var ItemSchema = new Schema({
         type: String,
         default: ''
     },
+    category: {
+        type: Schema.ObjectId,
+        ref: 'Category'
+    },
     category_name: {
         type: String
     },

@@ -18,20 +18,28 @@ var GroupSchema = new Schema({
     },
     category: {
         type: Schema.ObjectId,
-        ref: 'Category',
-        default: null
+        ref: 'Category'
     },
     category_name: {
-        type: String,
-        default: ''
+        type: String
+    },
+    order: {
+        type: Number,
+        default: 100
+    },
+    is_main: {
+        type: Boolean,
+        default: false
+    },
+    is_singleselect: {
+        type: Boolean,
+        default: false
     },
     access: {
-        type: String,
-        default: ''
+        type: String
     },
     sid: {
-        type: Number,
-        default: 0
+        type: Number
     }
 });
 

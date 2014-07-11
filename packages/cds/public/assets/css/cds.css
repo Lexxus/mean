@@ -1,3 +1,31 @@
 .cds-example h1: {
 	background-color: purple
 }
+
+.filter-bar {
+	background: #428BCA;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+
+.filter-bar .btn-group {
+	margin: 0 3px;
+}
+
+.d3item {
+	border: 2px #CCC solid;
+	border-radius: 4px;
+	float: left;
+	margin: 4px;
+	height: 200px;
+	width: 200px;
+}
+
+.shopitem {
+	border: 2px #CCC solid;
+	border-radius: 4px;
+	float: left;
+	margin: 4px;
+	height: 200px;
+	width: 300px;
+}
