@@ -31,6 +31,7 @@
 }
 .navbar {
     border-bottom: 1px #DDD solid;
+    background-color: white;
 }
 .navbar .nav>li>a.brand {
     padding-left:20px;

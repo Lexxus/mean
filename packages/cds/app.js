@@ -5,6 +5,8 @@
  */
 var Module = require('meanio').Module;
 
+var express = require('express');
+
 var Cds = new Module('cds');
 
 /*
@@ -45,6 +47,8 @@ Cds.register(function(app, auth, database) {
         //you now have the settings object
     });
     */
+    // Adding items path
+    app.use(express.static(require('path').normalize(__dirname + '/../../public/cds')));
 
     return Cds;
 });

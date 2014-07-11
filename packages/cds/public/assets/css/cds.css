@@ -17,8 +17,14 @@
 	border-radius: 4px;
 	float: left;
 	margin: 4px;
+	position: relative;
 	height: 200px;
 	width: 200px;
+}
+
+.d3item > img {
+	max-height: 196px;
+	max-width: 196px;
 }
 
 .shopitem {
@@ -26,6 +32,19 @@
 	border-radius: 4px;
 	float: left;
 	margin: 4px;
+	position: relative;
 	height: 200px;
 	width: 300px;
+}
+
+.shopitem > img {
+	max-height: 196px;
+	max-width: 296px;
+}
+
+.d3item > span, .shopitem > span {
+	position: absolute;
+	left: 2px;
+	bottom: 2px;
+	text-shadow: 1px 1px 2px white;
 }
