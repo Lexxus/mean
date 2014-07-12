@@ -12,13 +12,17 @@
 		<div class="btn-group">
 			<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">Objects <span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
-				<li role="presentation" ng-repeat="t in tags"><a href="#" role="menuitem" tabindex="-1">{{t.name}}</a></li>
+				<li ng-repeat="t in tags" ng-class="{active:t.active}"><a href="#" tabindex="-1" ng-click="toggleTag(t, $event)">{{t.name}}</a></li>
+				<li class="divider"></li>
+				<li><a href="#" ng-click="deselectAll('tags', $event)">Deselect all</a>
 			</ul>
 		</div>
 		<div class="btn-group" ng-repeat="f in fgroups">
 			<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">{{f.name}} <span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
-				<li role="presentation" ng-repeat="p in fdata[f.name]"><a href="#" role="menuitem" tabindex="-1">{{p.name}}</a></li>
+				<li ng-repeat="p in fdata[f.name]" ng-class="{active:p.active}"><a href="#" tabindex="-1" ng-click="toggleProp(p, $event)">{{p.name}}</a></li>
+				<li class="divider"></li>
+				<li><a href="#" ng-click="deselectAll(f.name, $event)">Deselect all</a>
 			</ul>
 		</div>
 	</div>
@@ -26,14 +30,14 @@
 		<div class="col-md-7">
 			<h4>{{category.name}} SHOP</h4>
 			<div class="shopitem" ng-repeat="item in shopitems">
-				<img src="{{item.image_src}}"/>
+				<img ng-src="{{item.image_src}}"/>
 				<span>{{item.name}}</span>
 			</div>
 		</div>
 		<div class="col-md-5">
 			<h4>3D MODELS</h4>
 			<div class="d3item" ng-repeat="item in d3items">
-				<img src="{{item.image_src}}"/>
+				<img ng-src="{{item.image_src}}"/>
 				<span>{{item.name}}</span>
 			</div>
 		</div>

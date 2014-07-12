@@ -31,6 +31,7 @@ exports.getItems = function(req, res, next) {
 	var keys = Object.keys(req.query);
 	if(keys.length) {
 		keys.forEach(function(k) {
+			if(!req.query[k]) return;
 			if(k === 'from') {
 				var skip = parseInt(req.query.from, 10);
 				if(!isNaN(skip)) options.skip = skip;

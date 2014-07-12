@@ -26,7 +26,11 @@ angular.module('mean.cds')
                 }
                 if(typeof params === 'object') {
                     var p = Object.keys(params).map(function(k) {
-                        return k +'='+ params[k];
+                        var v = params[k];
+                        if(Array.isArray(v)) {
+                            v = v.join(',');
+                        }
+                        return k +'='+ v;
                     });
                     uri += '?'+ p.join('&');
                 }
