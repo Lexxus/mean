@@ -28,7 +28,8 @@ module.exports = function(grunt) {
             html: {
                 files: paths.html,
                 options: {
-                    livereload: true
+                    livereload: true,
+                    interval: 500
                 }
             },
             css: {
@@ -91,7 +92,7 @@ module.exports = function(grunt) {
                 require: [
                     'server.js',
                     function() {
-                        require('mongoose').connection.once('open', function() {});
+                        require('meanio/lib/util').preload(__dirname + '/packages/**/server', 'model');
                     }
                 ]
             },

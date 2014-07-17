@@ -17,8 +17,11 @@
                 });
             });
 
-            // Load the controllers module
-            beforeEach(module('mean'));
+            beforeEach(function() {
+                module('mean');
+                module('mean.system');
+                module('mean.articles');
+            });
 
             // Initialize the controller and a mock scope
             var ArticlesController,
@@ -188,7 +191,7 @@
                     scope.remove(article);
                     $httpBackend.flush();
 
-                    // test after successful delete URL location articles lis
+                    // test after successful delete URL location articles list
                     //expect($location.path()).toBe('/articles');
                     expect(scope.articles.length).toBe(0);
 
