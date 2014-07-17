@@ -151,7 +151,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
                 });
             }
             if(isChanged) changeFilter();
-        }
+        };
 
         function errorHandler(err) {
             console.log(err);

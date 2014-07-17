@@ -249,6 +249,7 @@ exports.migrateItems = function(req, res) {
 		}
 	],  function(err) {
 		if(err) return res.json(500, err);
+		console.log('Start import items...');
 		var q = 'SELECT * FROM c_item ORDER BY id LIMIT ',
 			n = 0;
 		function getItem() {
@@ -283,7 +284,7 @@ exports.migrateItems = function(req, res) {
 				description: row.description,
 				image_src: row.image_src,
 				file_src: row.file_src,
-				category: row.type_id,
+				category: categories[row.type_id].id,
 				category_name: categories[row.type_id].name,
 				tags: ts.map(function(t) {
 					var tag = tags[t.tag_id];
