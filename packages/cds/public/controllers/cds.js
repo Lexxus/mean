@@ -17,6 +17,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
         $scope.fdata = {};
         $scope.d3items = [];
         $scope.shopitems = [];
+        $scope.pages = [1,2,3,4,5];
 
         if(Global.categories) {
         	$scope.categories = Global.categories;

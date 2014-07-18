@@ -28,10 +28,19 @@
 	</div>
 	<div class="row">
 		<div class="col-md-7">
-			<h4>{{category.name}} SHOP</h4>
-			<div class="shopitem" ng-repeat="item in shopitems">
-				<img ng-src="{{item.image_src}}"/>
-				<span>{{item.name}}</span>
+			<div class="block-header">
+				<h4 class="pull-left">{{category.name}} SHOP</h4>
+				<ul class="pagination">
+					<li><a href="#">&laquo;</a></li>
+					<li ng-repeat="p in pages"><a href="#{{p}}">{{p}}</a></li>
+					<li><a href="#">&raquo;</a></li>
+				</ul>
+			</div>
+			<div class="clearfix">
+				<div class="shopitem" ng-repeat="item in shopitems">
+					<img ng-src="{{item.image_src}}"/>
+					<span>{{item.name}}</span>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-5">
