@@ -32,14 +32,15 @@ exports.getItems = function(req, res, next) {
 	if(keys.length) {
 		keys.forEach(function(k) {
 			if(!req.query[k]) return;
-			if(k === 'from') {
-				var skip = parseInt(req.query.from, 10);
+			if(k === 'skip') {
+				var skip = parseInt(req.query.skip, 10);
 				if(!isNaN(skip)) options.skip = skip;
 				return;
 			}
 			if(k === 'limit') {
 				var limit = parseInt(req.query.limit, 10);
 				if(!isNaN(limit)) options.limit = limit;
+				return;
 			}
 			var ss = req.query[k].split(',');
 			if(ss.length === 1) {
@@ -50,8 +51,20 @@ exports.getItems = function(req, res, next) {
 			}
 		});
 	}
-	Item.find(query, fields, options, function(err, items) {
+
+	require('async').parallel({
+		total: function(done) {
+			Item.count(query, done);
+		},
+		items: function(done) {
+			Item.find(query, fields, options, done);
+		}
+	}, function(err, result) {
 		if(err) return next(err);
-		res.json(items);
+		res.json({
+			result: result.items,
+			total: result.total
+		});
 	});
+	
 };

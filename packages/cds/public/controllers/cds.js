@@ -15,9 +15,19 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
         $scope.tags = [];
         $scope.fnames = [];
         $scope.fdata = {};
-        $scope.d3items = [];
-        $scope.shopitems = [];
-        $scope.pages = [1,2,3,4,5];
+        $scope.d3 = {
+            items: [],
+            total: 0
+        };
+        $scope.shop = {
+            items: 0,
+            total: 0
+        };
+        $scope.d3Pages = 0;
+        $scope.shopPages = 0;
+        $scope.pageCount = 9;
+        $scope.shopPage = 1;
+        $scope.d3Page = 1;
 
         if(Global.categories) {
         	$scope.categories = Global.categories;
@@ -92,15 +102,30 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
         }
 
         function changeFilter() {
+            load3dItems();
+            loadShopItems();
+        }
+
+        function load3dItems() {
+            filter.limit = $scope.pageCount;
+            filter.skip = ($scope.d3Page - 1) * $scope.pageCount;
             Cds.getItems($scope.category._id, '3d', filter)
                 .success(function(data) {
-                    $scope.d3items = data;
+                    $scope.d3.items = data.result;
+                    $scope.d3.total = data.total;
+                    $scope.d3Pages = generatePages(data.total, $scope.pageCount, $scope.d3Page);
                 })
                 .error(errorHandler)
             ;
+        }
+        function loadShopItems() {
+            filter.limit = $scope.pageCount;
+            filter.skip = ($scope.shopPage - 1) * $scope.pageCount;
             Cds.getItems($scope.category._id, 'shop', filter)
                 .success(function(data) {
-                    $scope.shopitems = data;
+                    $scope.shop.items = data.result;
+                    $scope.shop.total = data.total;
+                    $scope.shopPages = generatePages(data.total, $scope.pageCount, $scope.shopPage);
                 })
                 .error(errorHandler)
             ;
@@ -163,5 +188,33 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
             status.type = type || 'info';
             status.text = message;
         }
+
+        function generatePages(total, pageCount, pageCurrent) {
+            var n = Math.ceil(total / pageCount);
+            var pages = [];
+            for(var i = 1, np; i <= n; i++) {
+                if(i === 1 || i === n || pageCurrent === i || (i === 2 && pageCurrent === 3) || (i === n - 1 && pageCurrent === n - 2)) {
+                    pages.push({t:i, n:i});
+                }
+                else {
+                    if(i < pageCurrent) {
+                        np = Math.round((pageCurrent - i) / 2) + i;
+                        i = pageCurrent - 1;
+                    }
+                    else {
+                        np = Math.round((n - i) / 2) + i;
+                        i = n - 1;
+                    }
+                    pages.push({t:'...', n:np});
+                }
+            }
+            return pages;
+        }
+
+        $scope.gotoPage = function(e) {
+            e.preventDefault();
+            $scope.shopPage = parseInt(e.target.hash.substr(1), 10);
+            loadShopItems();
+        };
     }
 ]);
