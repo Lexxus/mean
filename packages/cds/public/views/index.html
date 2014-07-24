@@ -30,10 +30,10 @@
 		<div class="col-md-7">
 			<div class="block-header">
 				<h4 class="pull-left">{{category.name}} SHOP</h4>
-				<ul class="pagination">
-					<li ng-class="{disabled:shopPage == 1}"><a href="#{{shopPage - 1}}" ng-click="gotoPage($event)">&laquo;</a></li>
-					<li ng-repeat="p in shopPages" ng-class="{active:p.n == shopPage}"><a href="#{{p.n}}" ng-click="gotoPage($event)">{{p.t}}</a></li>
-					<li ng-class="{disabled:shopPage == shopPages[shopPages.length-1].n}"><a href="#{{shopPage+1}}" ng-click="gotoPage($event)">&raquo;</a></li>
+				<ul class="pagination" ng-hide="!shopPages.length">
+					<li ng-class="{disabled:shopPage == 1}"><a href="#{{shopPage - 1}}" ng-click="gotoPage($event, 'shop')">&laquo;</a></li>
+					<li ng-repeat="p in shopPages" ng-class="{active:p.n == shopPage}"><a href="#{{p.n}}" ng-click="gotoPage($event, 'shop')">{{p.t}}</a></li>
+					<li ng-class="{disabled:shopPage == shopPages[shopPages.length-1].n}"><a href="#{{shopPage+1}}" ng-click="gotoPage($event, 'shop')">&raquo;</a></li>
 				</ul>
 			</div>
 			<div class="clearfix">
@@ -44,10 +44,19 @@
 			</div>
 		</div>
 		<div class="col-md-5">
-			<h4>3D MODELS</h4>
-			<div class="d3item" ng-repeat="item in d3.items">
-				<img ng-src="{{item.image_src}}"/>
-				<span>{{item.name}}</span>
+			<div class="block-header">
+				<h4>3D MODELS</h4>
+				<ul class="pagination">
+					<li ng-class="{disabled:d3Page == 1}"><a href="#{{d3Page - 1}}" ng-click="gotoPage($event, 'd3')">&laquo;</a></li>
+					<li ng-repeat="p in d3Pages" ng-class="{active:p.n == d3Page}"><a href="#{{p.n}}" ng-click="gotoPage($event, 'd3')">{{p.t}}</a></li>
+					<li ng-class="{disabled:d3Page == d3Pages[d3Pages.length-1].n}"><a href="#{{d3Page+1}}" ng-click="gotoPage($event, 'd3')">&raquo;</a></li>
+				</ul>
+			</div>
+			<div class="clearfix">
+				<div class="d3item" ng-repeat="item in d3.items">
+					<img ng-src="{{item.image_src}}"/>
+					<span>{{item.name}}</span>
+				</div>
 			</div>
 		</div>
 	</div>

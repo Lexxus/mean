@@ -102,6 +102,8 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
         }
 
         function changeFilter() {
+            $scope.shopPage = 1;
+            $scope.d3Page = 1;
             load3dItems();
             loadShopItems();
         }
@@ -211,10 +213,18 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
             return pages;
         }
 
-        $scope.gotoPage = function(e) {
+        $scope.gotoPage = function(e, type) {
             e.preventDefault();
-            $scope.shopPage = parseInt(e.target.hash.substr(1), 10);
-            loadShopItems();
+            if(e.target.parentElement.className === 'disabled') return;
+            var pageNum = parseInt(e.target.hash.substr(1), 10);
+            if(type === 'shop') {
+                $scope.shopPage = pageNum;
+                loadShopItems();
+            }
+            else {
+                $scope.d3Page = pageNum;
+                load3dItems();
+            }
         };
     }
 ]);
