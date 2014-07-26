@@ -28,6 +28,8 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
         $scope.pageCount = 9;
         $scope.shopPage = 1;
         $scope.d3Page = 1;
+        $scope.shopHidden = false;
+        $scope.d3Hidden = false;
 
         if(Global.categories) {
         	$scope.categories = Global.categories;
