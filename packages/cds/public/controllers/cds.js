@@ -3,6 +3,14 @@
 angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds',
     function($scope, Global, Cds) {
         $scope.global = Global;
+        var model = $scope.model = {
+            showMode: 'both',
+            shopClass: ''
+        };
+        $scope.action = {
+            close:    closePanel,
+            gotoPage: gotoPage
+        };
         var status = {
         	type: 'error',
         	text: ''
@@ -215,7 +223,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
             return pages;
         }
 
-        $scope.gotoPage = function(e, type) {
+        function gotoPage(e, type) {
             e.preventDefault();
             if(e.target.parentElement.className === 'disabled') return;
             var pageNum = parseInt(e.target.hash.substr(1), 10);
@@ -228,5 +236,24 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
                 load3dItems();
             }
         };
+
+        function closePanel(panel) {
+            if(panel === 'left') {
+                if(model.showMode === 'right') {
+                    model.showMode = 'both';
+                }
+                else {
+                    model.showMode = 'right';
+                }
+            }
+            else {
+                if(model.showMode === 'left') {
+                    model.showMode = 'both';
+                }
+                else {
+                    model.showMode = 'left';
+                }
+            }
+        }
     }
 ]);

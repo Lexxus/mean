@@ -27,14 +27,16 @@
 		</div>
 	</div>
 	<div class="main-view" ng-hide="!category">
-		<div class="shop-box">
-			<button type="button" class="close right-corner" ng-click="shopHidden=!shopHidden">&times;</button>
+		<div ng-class="{'shop-box':true, closed:model.showMode === 'right', wide:model.showMode === 'left'}">
+			<button type="button" class="close right-corner" ng-click="action.close('left')">
+				<span ng-class="{glyphicon:true, 'glyphicon-chevron-left':model.showMode !== 'right', 'glyphicon-chevron-right':model.showMode === 'right'}"></span>
+			</button>
 			<div class="block-header" ng-hide="shopHidden">
 				<h4 class="pull-left">{{category.name}} SHOP</h4>
 				<ul class="pagination" ng-hide="!shopPages.length">
-					<li ng-class="{disabled:shopPage == 1}"><a href="#{{shopPage - 1}}" ng-click="gotoPage($event, 'shop')">&laquo;</a></li>
-					<li ng-repeat="p in shopPages" ng-class="{active:p.n == shopPage}"><a href="#{{p.n}}" ng-click="gotoPage($event, 'shop')">{{p.t}}</a></li>
-					<li ng-class="{disabled:shopPage == shopPages[shopPages.length-1].n}"><a href="#{{shopPage+1}}" ng-click="gotoPage($event, 'shop')">&raquo;</a></li>
+					<li ng-class="{disabled:shopPage == 1}"><a href="#{{shopPage - 1}}" ng-click="action.gotoPage($event, 'shop')">&laquo;</a></li>
+					<li ng-repeat="p in shopPages" ng-class="{active:p.n == shopPage}"><a href="#{{p.n}}" ng-click="action.gotoPage($event, 'shop')">{{p.t}}</a></li>
+					<li ng-class="{disabled:shopPage == shopPages[shopPages.length-1].n}"><a href="#{{shopPage+1}}" ng-click="action.gotoPage($event, 'shop')">&raquo;</a></li>
 				</ul>
 			</div>
 			<div class="shop-items clearfix" ng-hide="shopHidden">
@@ -44,14 +46,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="d3-box" ng-hide="d3Hidden">
+		<div ng-class="{'d3-box':true, closed:model.showMode === 'left', wide:model.showMode === 'right'}">
+			<button type="button" class="close left-corner" ng-click="action.close('right')">
+				<span ng-class="{glyphicon:true, 'glyphicon-chevron-left':model.showMode === 'left', 'glyphicon-chevron-right':model.showMode !== 'left'}"></span>
+			</button>
 			<div class="block-header">
 				<h4>3D MODELS</h4>
-				<button type="button" class="close pull-right" ng-click="d3Hidden=!d2Hidden">&times;</button>
 				<ul class="pagination">
-					<li ng-class="{disabled:d3Page == 1}"><a href="#{{d3Page - 1}}" ng-click="gotoPage($event, 'd3')">&laquo;</a></li>
-					<li ng-repeat="p in d3Pages" ng-class="{active:p.n == d3Page}"><a href="#{{p.n}}" ng-click="gotoPage($event, 'd3')">{{p.t}}</a></li>
-					<li ng-class="{disabled:d3Page == d3Pages[d3Pages.length-1].n}"><a href="#{{d3Page+1}}" ng-click="gotoPage($event, 'd3')">&raquo;</a></li>
+					<li ng-class="{disabled:d3Page == 1}"><a href="#{{d3Page - 1}}" ng-click="action.gotoPage($event, 'd3')">&laquo;</a></li>
+					<li ng-repeat="p in d3Pages" ng-class="{active:p.n == d3Page}"><a href="#{{p.n}}" ng-click="action.gotoPage($event, 'd3')">{{p.t}}</a></li>
+					<li ng-class="{disabled:d3Page == d3Pages[d3Pages.length-1].n}"><a href="#{{d3Page+1}}" ng-click="action.gotoPage($event, 'd3')">&raquo;</a></li>
 				</ul>
 			</div>
 			<div class="d3-items clearfix">

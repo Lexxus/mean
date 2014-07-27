@@ -23,7 +23,7 @@
 
 .d3-box {
 	border-left: 1px #428BCA solid;
-	padding: 15px;
+	padding: 20px 15px 15px 15px;
 	position: relative;
 	-webkit-flex: 20 1 40%;
 			flex: 20 1 40%;
@@ -62,7 +62,7 @@
 
 .shop-box {
 	border-right: 1px #428BCA solid;
-	padding: 15px;
+	padding: 20px 15px 15px 15px;
 	position: relative;
 	-webkit-flex: 20 1 60%;
 			flex: 20 1 60%;
@@ -106,6 +106,19 @@
 	text-shadow: 1px 1px 2px white;
 }
 
+.shop-box.closed, .d3-box.closed {
+	-webkit-flex: 1 1 30px;
+			flex: 1 1 30px;
+}
+.closed > .shop-items, .closed > .d3-items, .closed > .block-header {
+	display: none;
+}
+.shop-box.wide, .d3-box.wide {
+	-webkit-flex: 4 1 90%;
+			flex: 4 1 90%;
+}
+
+
 .block-header {
 	position: relative;
 	text-align: center;
@@ -122,6 +135,13 @@
 
 .right-corner {
 	top: 5px;
-	right: 10px;
+	right: 15px;
 	position:absolute;
+	z-index: 10;
+}
+.left-corner {
+	top: 5px;
+	left: 12px;
+	position:absolute;
+	z-index: 10;
 }
