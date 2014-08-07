@@ -1,62 +1,30 @@
 'use strict';
 
-angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds',
-    function($scope, Global, Cds) {
-        $scope.global = Global;
-        var model = $scope.model = {
-            showMode: 'both',
-            shopClass: ''
-        };
-        $scope.action = {
-            close:    closePanel,
-            gotoPage: gotoPage
-        };
-        var status = {
-        	type: 'error',
-        	text: ''
-        };
-        var filter = {
-            tags: [],
-            properties: []
-        };
-        $scope.status = status;
-        $scope.tags = [];
-        $scope.fnames = [];
-        $scope.fdata = {};
-        $scope.d3 = {
-            items: [],
-            total: 0
-        };
-        $scope.shop = {
-            items: 0,
-            total: 0
-        };
-        $scope.d3Pages = 0;
-        $scope.shopPages = 0;
-        $scope.pageCount = 9;
-        $scope.shopPage = 1;
-        $scope.d3Page = 1;
-        $scope.shopHidden = false;
-        $scope.d3Hidden = false;
-
-        if(Global.categories) {
-        	$scope.categories = Global.categories;
-            changeCategory();
-        }
-        else {
-	        Cds.getCategories()
-	        	.success(function(data) {
-	        		Global.categories = data;
-	        		$scope.categories = data;
-                    changeCategory();
-	        	})
-	        	.error(errorHandler)
-	        ;
-	    }
-
-        window.addEventListener('hashchange', changeCategory, false);
-
+angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Global', 'Cds',
+    function($scope, $modal, Global, Cds) {
         function changeCategory() {
+            // load properties
+            function getProperties() {
+                Cds.getProperties($scope.category._id)
+                    .success(function(data) {
+                        if(!data || !data.length) return;
+                        var fdata = {}, g;
+                        data.forEach(function(p) {
+                            if(g !== p.group_name) {
+                                g = p.group_name;
+                                if(!fdata[g]) fdata[g] = [];
+                            }
+                            fdata[g].push({
+                                _id: p._id,
+                                name: p.name
+                            });
+                        });
+                        $scope.fdata = fdata;
+                    })
+                    .error(errorHandler)
+                ;
+            }
+            
             var catName = window.location.hash.split('/').pop();
             if(!$scope.categories) return;
             var isNotValid = $scope.categories.every(function(c) {
@@ -86,27 +54,6 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
                 .error(errorHandler)
             ;
 
-            // load properties
-            function getProperties() {
-                Cds.getProperties($scope.category._id)
-                    .success(function(data) {
-                        if(!data || !data.length) return;
-                        var fdata = {}, g;
-                        data.forEach(function(p) {
-                            if(g !== p.group_name) {
-                                g = p.group_name;
-                                if(!fdata[g]) fdata[g] = [];
-                            }
-                            fdata[g].push({
-                                _id: p._id,
-                                name: p.name
-                            });
-                        });
-                        $scope.fdata = fdata;
-                    })
-                    .error(errorHandler)
-                ;
-            }
             // load items
             changeFilter();
         }
@@ -255,5 +202,82 @@ angular.module('mean.cds').controller('CdsController', ['$scope', 'Global', 'Cds
                 }
             }
         }
+
+        function openDetailsModal(item) {
+            console.log('openDetailsModal:', item);
+            var modalInstance = $modal.open({
+                templateUrl: 'itemDetailsModal.html',
+                controller: function ($scope, $modalInstance, item) {
+                    $scope.item = item;
+
+                    $scope.close = function () {
+                        $modalInstance.close();
+                    };
+                },
+                size: 'lg',
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
+                }
+            });
+        }
+
+
+        $scope.global = Global;
+        var model = $scope.model = {
+            showMode: 'both',
+            shopClass: ''
+        };
+        $scope.action = {
+            close:       closePanel,
+            gotoPage:    gotoPage,
+            openDetails: openDetailsModal
+        };
+
+        var status = {
+        	type: 'error',
+        	text: ''
+        };
+        var filter = {
+            tags: [],
+            properties: []
+        };
+        $scope.status = status;
+        $scope.tags = [];
+        $scope.fnames = [];
+        $scope.fdata = {};
+        $scope.d3 = {
+            items: [],
+            total: 0
+        };
+        $scope.shop = {
+            items: 0,
+            total: 0
+        };
+        $scope.d3Pages = 0;
+        $scope.shopPages = 0;
+        $scope.pageCount = 9;
+        $scope.shopPage = 1;
+        $scope.d3Page = 1;
+        $scope.shopHidden = false;
+        $scope.d3Hidden = false;
+
+        if(Global.categories) {
+        	$scope.categories = Global.categories;
+            changeCategory();
+        }
+        else {
+	        Cds.getCategories()
+	        	.success(function(data) {
+	        		Global.categories = data;
+	        		$scope.categories = data;
+                    changeCategory();
+	        	})
+	        	.error(errorHandler)
+	        ;
+	    }
+
+        window.addEventListener('hashchange', changeCategory, false);
     }
 ]);

@@ -38,6 +38,9 @@
 }
 
 .d3item {
+	border: 2px #CCC solid;
+	border-radius: 4px;
+	cursor: pointer;
 	display: -webkit-flex;
 	display:         flex;
 	-webkit-flex-flow: row;
@@ -46,8 +49,6 @@
 			align-items: center;
 	-webkit-justify-content: center;
 			justify-content: center;
-	border: 2px #CCC solid;
-	border-radius: 4px;
 	float: left;
 	margin: 4px;
 	position: relative;
@@ -77,6 +78,9 @@
 }
 
 .shopitem {
+	border: 2px #CCC solid;
+	border-radius: 4px;
+	cursor: pointer;
 	display: -webkit-flex;
 	display:         flex;
 	-webkit-flex-flow: row;
@@ -85,8 +89,6 @@
 			align-items: center;
 	-webkit-justify-content: center;
 			justify-content: center;
-	border: 2px #CCC solid;
-	border-radius: 4px;
 	float: left;
 	margin: 4px;
 	position: relative;
@@ -144,4 +146,8 @@
 	left: 12px;
 	position:absolute;
 	z-index: 10;
+}
+
+.modal-body > img {
+	max-width: 100%;
 }

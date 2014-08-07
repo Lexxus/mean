@@ -39,12 +39,12 @@
 					<li ng-class="{disabled:shopPage == shopPages[shopPages.length-1].n}"><a href="#{{shopPage+1}}" ng-click="action.gotoPage($event, 'shop')">&raquo;</a></li>
 				</ul>
 			</div>
-			<div class="shop-items clearfix" ng-hide="shopHidden">
-				<div class="shopitem" ng-repeat="item in shop.items">
+			<ul class="shop-items clearfix" ng-hide="shopHidden">
+				<li class="shopitem" ng-repeat="item in shop.items" ng-click="action.openDetails(item)">
 					<img ng-src="{{item.image_src}}"/>
 					<span>{{item.name}}</span>
-				</div>
-			</div>
+				</li>
+			</ul>
 		</div>
 		<div ng-class="{'d3-box':true, closed:model.showMode === 'left', wide:model.showMode === 'right'}">
 			<button type="button" class="close left-corner" ng-click="action.close('right')">
@@ -66,4 +66,16 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/ng-template" id="itemDetailsModal.html">
+        <div class="modal-header">
+        	<button type="button" ng-click="close()" class="close pull-right">&times;</button>
+            <h3 class="modal-title">{{item.name}}</h3>
+        </div>
+        <div class="modal-body">
+            <img ng-src="{{item.image_src}}" />
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="close()">Close</button>
+        </div>
+    </script>
 </div>
