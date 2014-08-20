@@ -72,7 +72,17 @@
             <h3 class="modal-title">{{item.name}}</h3>
         </div>
         <div class="modal-body">
-            <img ng-src="{{item.image_src}}" />
+            <div class="modal-body-image">
+                <img ng-src="{{item.image_src}}" />
+            </div>
+            <div class="modal-body-text">
+                <div class="modal-body-title">{{item.name}}</div>
+                <div class="modal-body-values">
+                    <div><span>Author: </span><span>XXX XXX</span></div>
+                    <div><span>File size: </span><span>XXX</span></div>
+                    <div><span>File format: </span><span>XXX</span></div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="close()">Close</button>
