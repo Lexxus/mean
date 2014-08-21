@@ -148,6 +148,22 @@
 	z-index: 10;
 }
 
-.modal-body > img {
-	max-width: 100%;
+.modal-body-image img {
+    width: 100%;
+}
+.modal-body-image {
+    padding-right: 200px;
+    width: 100%;
+}
+.modal-body-text {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right:0;
+    width: 200px;
+    margin-top: 50px;
+}
+.modal-body-title {
+    font-size: 30px;
+    margin-bottom: 100px;
 }
