@@ -148,12 +148,19 @@
 	z-index: 10;
 }
 
+
 .modal-body-image img {
-    width: 100%;
+    max-width: 100%;
+    height: 100%;
 }
 .modal-body-image {
+    text-align: center;
     padding-right: 200px;
     width: 100%;
+    /*percentage of screen height*/
+    height: 60vh;
+    overflow: hidden;
+    position: relative;
 }
 .modal-body-text {
     position: absolute;

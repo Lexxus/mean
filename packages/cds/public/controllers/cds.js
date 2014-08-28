@@ -24,7 +24,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
                     .error(errorHandler)
                 ;
             }
-            
+
             var catName = window.location.hash.split('/').pop();
             if(!$scope.categories) return;
             var isNotValid = $scope.categories.every(function(c) {
@@ -59,36 +59,34 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
         }
 
         function changeFilter() {
-            $scope.shopPage = 1;
-            $scope.d3Page = 1;
-            load3dItems();
-            loadShopItems();
+            $scope.loadShopPageItems();
+            $scope.load3dPageItems();
         }
 
-        function load3dItems() {
+        //Callbacks on paginator change
+        $scope.loadShopPageItems = function() {
             filter.limit = $scope.pageCount;
-            filter.skip = ($scope.d3Page - 1) * $scope.pageCount;
-            Cds.getItems($scope.category._id, '3d', filter)
-                .success(function(data) {
-                    $scope.d3.items = data.result;
-                    $scope.d3.total = data.total;
-                    $scope.d3Pages = generatePages(data.total, $scope.pageCount, $scope.d3Page);
-                })
-                .error(errorHandler)
-            ;
-        }
-        function loadShopItems() {
-            filter.limit = $scope.pageCount;
-            filter.skip = ($scope.shopPage - 1) * $scope.pageCount;
+            filter.skip = ($scope.shop.currentPage - 1) * $scope.pageCount;
             Cds.getItems($scope.category._id, 'shop', filter)
                 .success(function(data) {
                     $scope.shop.items = data.result;
                     $scope.shop.total = data.total;
-                    $scope.shopPages = generatePages(data.total, $scope.pageCount, $scope.shopPage);
                 })
                 .error(errorHandler)
             ;
-        }
+        };
+
+        $scope.load3dPageItems = function() {
+            filter.limit = $scope.pageCount;
+            filter.skip = ($scope.d3.currentPage - 1) * $scope.pageCount;
+            Cds.getItems($scope.category._id, '3d', filter)
+                .success(function(data) {
+                    $scope.d3.total = data.total;
+                    $scope.d3.items = data.result;
+                })
+                .error(errorHandler)
+            ;
+        };
 
         $scope.toggleTag = function(tag, e) {
             toggleFilter('tags', tag, e);
@@ -148,42 +146,6 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
             status.text = message;
         }
 
-        function generatePages(total, pageCount, pageCurrent) {
-            var n = Math.ceil(total / pageCount);
-            var pages = [];
-            for(var i = 1, np; i <= n; i++) {
-                if(i === 1 || i === n || pageCurrent === i || (i === 2 && pageCurrent === 3) || (i === n - 1 && pageCurrent === n - 2)) {
-                    pages.push({t:i, n:i});
-                }
-                else {
-                    if(i < pageCurrent) {
-                        np = Math.round((pageCurrent - i) / 2) + i;
-                        i = pageCurrent - 1;
-                    }
-                    else {
-                        np = Math.round((n - i) / 2) + i;
-                        i = n - 1;
-                    }
-                    pages.push({t:'...', n:np});
-                }
-            }
-            return pages;
-        }
-
-        function gotoPage(e, type) {
-            e.preventDefault();
-            if(e.target.parentElement.className === 'disabled') return;
-            var pageNum = parseInt(e.target.hash.substr(1), 10);
-            if(type === 'shop') {
-                $scope.shopPage = pageNum;
-                loadShopItems();
-            }
-            else {
-                $scope.d3Page = pageNum;
-                load3dItems();
-            }
-        };
-
         function closePanel(panel) {
             if(panel === 'left') {
                 if(model.showMode === 'right') {
@@ -205,8 +167,8 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
 
         function openDetailsModal(item) {
             console.log('openDetailsModal:', item);
-            var modalInstance = $modal.open({
-                templateUrl: 'itemDetailsModal.html',
+            $modal.open({
+                templdateUrl: 'itemDetailsModal.html',
                 controller: function ($scope, $modalInstance, item) {
                     $scope.item = item;
 
@@ -223,7 +185,6 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
             });
         }
 
-
         $scope.global = Global;
         var model = $scope.model = {
             showMode: 'both',
@@ -231,7 +192,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
         };
         $scope.action = {
             close:       closePanel,
-            gotoPage:    gotoPage,
+            //gotoPage:    gotoPage,
             openDetails: openDetailsModal
         };
 
@@ -249,17 +210,15 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
         $scope.fdata = {};
         $scope.d3 = {
             items: [],
-            total: 0
+            total: 0,
+            currentPage: 1
         };
         $scope.shop = {
             items: 0,
-            total: 0
+            total: 0,
+            currentPage: 1
         };
-        $scope.d3Pages = 0;
-        $scope.shopPages = 0;
-        $scope.pageCount = 9;
-        $scope.shopPage = 1;
-        $scope.d3Page = 1;
+        $scope.pageCount = 8;
         $scope.shopHidden = false;
         $scope.d3Hidden = false;
 
@@ -277,7 +236,6 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
 	        	.error(errorHandler)
 	        ;
 	    }
-
         window.addEventListener('hashchange', changeCategory, false);
     }
 ]);
