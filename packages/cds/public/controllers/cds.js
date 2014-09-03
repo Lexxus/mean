@@ -168,7 +168,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
         function openDetailsModal(item) {
             console.log('openDetailsModal:', item);
             $modal.open({
-                templdateUrl: 'itemDetailsModal.html',
+                templateUrl: 'itemDetailsModal.html',
                 controller: function ($scope, $modalInstance, item) {
                     $scope.item = item;
 
@@ -185,6 +185,11 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
             });
         }
 
+        $scope.resetShopItems = function() {
+            $scope.shop.items.forEach(function(item, index) {
+                item.selected = '';
+            });
+        };
         $scope.global = Global;
         var model = $scope.model = {
             showMode: 'both',
@@ -218,7 +223,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
             total: 0,
             currentPage: 1
         };
-        $scope.pageCount = 8;
+        $scope.pageCount = 5;
         $scope.shopHidden = false;
         $scope.d3Hidden = false;
 

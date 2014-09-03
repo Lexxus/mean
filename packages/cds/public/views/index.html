@@ -35,13 +35,25 @@
 
             <div class="block-header" ng-hide="shopHidden">
 				<h4 class="pull-left">{{category.name}} SHOP</h4>           
-				<pagination class="pagination" total-items="shop.total" ng-model="shop.currentPage" ng-change="loadShopPageItems()" max-size="pageCount"></pagination>
+				<span class="block-header-reset" ng-click="resetShopItems()">Reset all</spa>
+			</div>
+			<div>
+				<pagination class="pagination" rotate="false" boundary-links="false" total-items="shop.total" ng-model="shop.currentPage" ng-change="loadShopPageItems()" max-size="pageCount"></pagination>
 			</div>
 
 			<ul class="shop-items clearfix" ng-hide="shopHidden">
-				<li class="shopitem" ng-repeat="item in shop.items" ng-click="action.openDetails(item)">
-					<img ng-src="{{item.image_src}}"/>
-					<span>{{item.name}}</span>
+				<li class="shopitem" ng-repeat="item in shop.items">
+					<div class="item-header">
+						<label>
+							<input type="checkbox" ng-model="item.selected" ng-true-value="1" ng-false-value="">
+							<span>{{item.selected ? "Selected" : "Deselect" }}</span>
+						</label>
+						<span class="item-header-name">{{item.name}}</span>
+						<span class="item-header-basket"></span>
+					</div>
+					<div class="item-content" ng-click="action.openDetails(item)">
+						<img class="item-content-image" ng-src="{{item.image_src}}" />
+					</div>
 				</li>
 			</ul>
 
@@ -55,7 +67,7 @@
 
             <div class="block-header">
 				<h4>3D MODELS</h4>
-                <pagination class="pagination" total-items="d3.total" ng-model="d3.currentPage" ng-change="load3dPageItems()" max-size="pageCount"></pagination>
+                <pagination class="pagination" rotate="false" boundary-links="false" total-items="d3.total" ng-model="d3.currentPage" ng-change="load3dPageItems()" max-size="pageCount"></pagination>
             </div>
 
 			<div class="d3-items clearfix">
@@ -73,7 +85,17 @@
             <h3 class="modal-title">{{item.name}}</h3>
         </div>
         <div class="modal-body">
-            <img ng-src="{{item.image_src}}" />
+            <div class="modal-body-image">
+                <img ng-src="{{item.image_src}}" />
+            </div>
+            <div class="modal-body-text">
+                <div class="modal-body-title">{{item.name}}</div>
+                <div class="modal-body-values">
+                    <div><span>Author: </span><span>XXX XXX</span></div>
+                    <div><span>File size: </span><span>XXX</span></div>
+                    <div><span>File format: </span><span>XXX</span></div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="close()">Close</button>

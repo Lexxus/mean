@@ -1,3 +1,13 @@
+/* region inputs */
+
+input[type="checkbox"]:hover,
+label:hover {
+	cursor: pointer;
+}
+
+/* end region inputs */
+
+
 .cds-example h1: {
 	background-color: purple
 }
@@ -96,7 +106,30 @@
 	width: 300px;
 }
 
-.shopitem > img {
+.item-header {
+	color: #FFFFFF;
+	padding: 5px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	background: rgba(0,0,0, 0.5);
+}
+.item-header > * {
+	display: inline-block;
+}
+
+.item-header-basket {
+	width:17px;
+	height: 15px;
+	background: url('../img/arrow-red.png') no-repeat top left;
+}
+.item-header label,
+.item-header-name {
+	margin-right: 10px;
+}
+
+.shopitem .item-content img {
 	max-height: 196px;
 	max-width: 296px;
 }
@@ -122,17 +155,21 @@
 
 
 .block-header {
+	overflow: hidden;
 	position: relative;
-	text-align: center;
+}
+.block-header-reset {
+	display: inline-block; 	
+	margin-top: 12px;
+}
+.block-header-reset:hover {
+	cursor: pointer;
 }
 .block-header h4 {
-	left: 0;
-	top: 0;
-	position: absolute;
+	margin-right: 20px;
 }
-.block-header .pagination {
-	margin-top: 5px;
-	margin-bottom: 0;
+.pagination {
+	margin: 5px 0px;
 }
 
 .right-corner {
@@ -151,7 +188,6 @@
 
 .modal-body-image img {
     max-width: 100%;
-    height: 100%;
 }
 .modal-body-image {
     text-align: center;
