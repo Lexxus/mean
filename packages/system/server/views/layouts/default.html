@@ -3,7 +3,9 @@
 {% include '../includes/head.html' %}
 
 <body ng-cloak class="ng-cloak">
-    <header class="navbar navbar-inverse navbar-fixed-top" data-ng-include="'/system/views/header.html'" data-role="navigation"></header>
+    <header class="navbar navbar-fixed-top">
+        <div class="container" data-ng-include="'/system/views/header.html'" data-role="navigation"></div>
+    </header>
     {% if adminEnabled %}
     <section class="admin-menu">
         <div data-ng-include="'/mean-admin/views/index.html'"></div>

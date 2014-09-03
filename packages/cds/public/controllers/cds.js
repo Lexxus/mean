@@ -257,7 +257,7 @@ angular.module('mean.cds').controller('CdsController', ['$scope', '$modal', 'Glo
         };
         $scope.d3Pages = 0;
         $scope.shopPages = 0;
-        $scope.pageCount = 9;
+        $scope.pageCount = 10;
         $scope.shopPage = 1;
         $scope.d3Page = 1;
         $scope.shopHidden = false;
