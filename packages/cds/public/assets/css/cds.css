@@ -42,13 +42,15 @@ label:hover {
 }
 
 .d3-items {
-	border: 2px #944272 solid;
+	background-color: #FFF4F6;
+	/*border: 2px #944272 solid;*/
 	border-radius: 5px;
 	padding: 5px;
 }
 
 .d3item {
-	border: 2px #CCC solid;
+	background-color: #FFF;
+	border: 2px #FFF solid;
 	border-radius: 4px;
 	cursor: pointer;
 	display: -webkit-flex;
@@ -64,6 +66,10 @@ label:hover {
 	position: relative;
 	height: 200px;
 	width: 200px;
+}
+
+.d3item:hover {
+	border: 2px #CCC solid;
 }
 
 .d3item > img {
@@ -82,13 +88,15 @@ label:hover {
 }
 
 .shop-items {
-	border: 2px #EEE solid;
+	background-color: #F8F8F8;
+	/*border: 2px #EEE solid;*/
 	border-radius: 5px;
 	padding: 5px;
 }
 
 .shopitem {
-	border: 2px #CCC solid;
+	background-color: #FFF;
+	border: 2px #FFF solid;
 	border-radius: 4px;
 	cursor: pointer;
 	display: -webkit-flex;
@@ -104,6 +112,9 @@ label:hover {
 	position: relative;
 	height: 200px;
 	width: 300px;
+}
+.shopitem:hover {
+	border: 2px #CCC solid;
 }
 
 .item-header {
