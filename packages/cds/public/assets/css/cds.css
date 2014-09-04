@@ -156,6 +156,9 @@ label:hover {
 	-webkit-flex: 1 1 30px;
 			flex: 1 1 30px;
 }
+.shop-box.closed .pagination {
+	display: none;
+}
 .closed > .shop-items, .closed > .d3-items, .closed > .block-header {
 	display: none;
 }
