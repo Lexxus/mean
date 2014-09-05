@@ -3,7 +3,7 @@
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="status.text=''">&times;</button>
 		{{ status.text }}
 	</div>
-	<ul class="nav nav-pills">
+	<ul class="nav nav-pills categories-list">
 		<li ng-repeat="c in categories" ng-class="c.name === category.name ? 'active':''">
 			<a href="#!/cat/{{c.name}}">{{c.name}}</a>
 		</li>
@@ -42,17 +42,16 @@
 			</div>
 
 			<ul class="shop-items clearfix" ng-hide="shopHidden">
-				<li class="shopitem" ng-repeat="item in shop.items">
-					<div class="item-header">
-						<label>
-							<input type="checkbox" ng-model="item.selected" ng-true-value="1" ng-false-value="">
-							<span>{{item.selected ? "Selected" : "Deselect" }}</span>
-						</label>
-						<span class="item-header-name">{{item.name}}</span>
+				<li class="shopitem" ng-repeat="item in shop.items" ng-class="{selected: item.selected}">
+					<div class="item-header" ng-class="{visible: item.selected}" >
+						<span ng-click="item.selected = false">Deselect</span>
 						<span class="item-header-basket"></span>
 					</div>
 					<div class="item-content" ng-click="action.openDetails(item)">
 						<img class="item-content-image" ng-src="{{item.image_src}}" />
+					</div>
+					<div class="item-footer" ng-class="{visible: !item.selected}">
+						<span ng-click="item.selected = true">Select</span>
 					</div>
 				</li>
 			</ul>

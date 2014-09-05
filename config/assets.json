@@ -2,6 +2,7 @@
   "core": {
     "css": {
       "bower_components/build/css/dist.min.css": [
+        "packages/cds/public/assets/css/bootstrap-overrides.css",
         "packages/cds/public/assets/css/cds.css"
       ]
     },

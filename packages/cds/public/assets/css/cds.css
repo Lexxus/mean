@@ -7,6 +7,19 @@ label:hover {
 
 /* end region inputs */
 
+.categories-list li {
+	margin: 0 5px 0 0;
+}
+.categories-list .active a{
+	color: #000 !important;
+	background-color: transparent !important;
+	border: 1px solid gray !important;
+}
+.categories-list a {
+	padding: 0px 5px !important;
+	color: 1px solid darkgray !important;
+	border: 1px solid darkgray !important;
+}
 
 .cds-example h1: {
 	background-color: purple
@@ -15,11 +28,13 @@ label:hover {
 .filter-bar {
 	background: #428BCA;
 	margin-top: 10px;
-	padding-left: 10px;
+	padding-left: 60px;
 }
-
-.filter-bar .btn-group {
-	margin: 0 3px;
+.filter-bar .btn {
+	min-width: 100px;
+	text-align: right;
+	border: none;
+	border-right: 1px solid #FFFFFF;
 }
 
 .main-view {
@@ -40,19 +55,21 @@ label:hover {
 	-webkit-order: 2;
 			order: 2;
 }
-
-.d3-items {
-	background-color: #FFF4F6;
-	/*border: 2px #944272 solid;*/
-	border-radius: 5px;
+.d3-items, 
+.shop-items {
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 2px;
 	padding: 5px;
-}
 
-.d3item {
-	background-color: #FFF;
-	border: 2px #FFF solid;
-	border-radius: 4px;
+}
+.d3item,
+.shopitem {
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 2px;
 	cursor: pointer;
+	background-color: #FFF;
 	display: -webkit-flex;
 	display:         flex;
 	-webkit-flex-flow: row;
@@ -65,13 +82,18 @@ label:hover {
 	margin: 4px;
 	position: relative;
 	height: 200px;
+}
+.d3-items {
+	border-color: pink;
+}
+
+.d3item {
+	border-color: darkgray;
 	width: 200px;
 }
-
 .d3item:hover {
-	border: 2px #CCC solid;
+	border-color: gray;
 }
-
 .d3item > img {
 	max-height: 196px;
 	max-width: 196px;
@@ -88,58 +110,60 @@ label:hover {
 }
 
 .shop-items {
-	background-color: #F8F8F8;
-	/*border: 2px #EEE solid;*/
-	border-radius: 5px;
-	padding: 5px;
+	border-color: darkgray;
 }
-
 .shopitem {
-	background-color: #FFF;
-	border: 2px #FFF solid;
-	border-radius: 4px;
-	cursor: pointer;
-	display: -webkit-flex;
-	display:         flex;
-	-webkit-flex-flow: row;
-			flex-flow: row;
-	-webkit-align-items: center;
-			align-items: center;
-	-webkit-justify-content: center;
-			justify-content: center;
-	float: left;
-	margin: 4px;
-	position: relative;
-	height: 200px;
+	border-color: darkgray;
 	width: 300px;
 }
 .shopitem:hover {
-	border: 2px #CCC solid;
+	border-color: gray;
 }
 
-.item-header {
+.item-header,
+.item-footer {
+	display: none;
 	color: #FFFFFF;
 	padding: 5px;
 	position: absolute;
 	left: 0;
 	right: 0;
-	top: 0;
 	background: rgba(0,0,0, 0.5);
+	z-index: 2;
+	text-transform: uppercase;
+}
+.item-header {
+	top: 0;
+}
+.item-footer {
+	bottom: 0;
+}
+.item-content {
+	width: 100%;
+	overflow: hidden;
 }
 .item-header > * {
 	display: inline-block;
 }
-
 .item-header-basket {
 	width:17px;
 	height: 15px;
+	margin-bottom: -3px;
 	background: url('../img/arrow-red.png') no-repeat top left;
 }
-.item-header label,
-.item-header-name {
-	margin-right: 10px;
+.item-footer.visible,
+.item-header.visible {
+	display: block;
 }
-
+.item-header.visible + .item-content:before {
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0, 0.5);
+	position: absolute;
+	top: 0px;
+	z-index: 1;
+}
 .shopitem .item-content img {
 	max-height: 196px;
 	max-width: 296px;
