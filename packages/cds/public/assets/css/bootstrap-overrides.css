@@ -15,8 +15,8 @@ a:hover, a:focus {
 	color: gray;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-	background-color: transparent;
-	color: black;
+	background-color: gray;
+	color: white;
 	border-color: gray;
 }
 

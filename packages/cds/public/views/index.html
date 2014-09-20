@@ -34,10 +34,7 @@
 			</button>
 
             <div class="block-header" ng-hide="shopHidden">
-				<h4 class="pull-left">{{category.name}} SHOP</h4>           
-				<span class="block-header-reset" ng-click="resetShopItems()">Reset all</spa>
-			</div>
-			<div>
+				<h4>{{category.name}} SHOP</h4>
 				<pagination class="pagination" rotate="false" boundary-links="false" total-items="shop.total" ng-model="shop.currentPage" ng-change="loadShopPageItems()" max-size="pageCount"></pagination>
 			</div>
 
